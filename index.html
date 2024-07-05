@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Parking Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .cover {
+      position: relative;
+      padding: 20px;
+    }
+    .input {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      font-size: 16px;
+      color: white;
+    }
+    .navbar {
+      background-color: #343a40;
+      padding: 10px;
+      color: white;
+    }
+    table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <h1> Car Parking Management</h1>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 cover">
+      <form id="parking-form">
+<!--        <h2>Car Parking Management </h2>-->
+        <div class="mb-3">
+          <label>Full Name:</label>
+          <input type="text" id="name" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Plate Number:</label>
+          <input type="text" id="pl-num" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Color:</label>
+          <input type="text" id="carC" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Phone Number:</label>
+          <input type="tel" id="telNum" class="form-control">
+        </div>
+        <button type="button" id="btn" class="btn btn-primary">Park</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <table id="myTable" class="table table-striped table-responsive">
+        <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Plate Number</th>
+          <th>Color</th>
+          <th>Phone Number</th>
+          <th>Check-in Time</th>
+          <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('btn').addEventListener('click', function() {
+    var name = document.getElementById('name').value;
+    var plate = document.getElementById('pl-num').value;
+    var color = document.getElementById('carC').value;
+    var phoneNum = document.getElementById('telNum').value;
+    var now = new Date();
+    var checkInTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+
+    var table = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+    var newRow = table.insertRow(table.rows.length);
+    newRow.innerHTML = `<td>${name}</td><td>${plate}</td><td>${color}</td><td>${phoneNum}</td><td>${checkInTime}</td><td><button onclick="removeRow(this)" class="btn btn-danger">Remove</button></td>`;
+  });
+
+  function removeRow(btn) {
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  }
+</script>
+</body>
+</html>
